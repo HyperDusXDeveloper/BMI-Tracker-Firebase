@@ -29,8 +29,8 @@
 * **Input:** กดปุ่ม "Sign in with Google" และเลือกบัญชี Gmail
 * **Expected Result:** ระบบพาไปที่หน้า Dashboard และแสดงรูปโปรไฟล์มุมขวาบนถูกต้อง
 * **Actual Result:** เข้าสู่ระบบได้สำเร็จและแสดงรูปโปรไฟล์ -> **Pass**
-* **Evidence:** ![Login Success](Test_Evidence/TC-01_Login_Success_01.png)
-* **Evidence:** ![Login Success](Test_Evidence/TC-01_Login_Success_02.png)
+* **Evidence TC-01_Login_Success_01 :** ![Login Success](Test_Evidence/TC-01_Login_Success_01.png)
+* **Evidence TC-01_Login_Success_02 :** ![Login Success](Test_Evidence/TC-01_Login_Success_02.png)
 
 **TC-10: ทดสอบการออกจากระบบ (Logout)**
 * **Pre-condition:** ผู้ใช้งานเข้าสู่ระบบแล้ว และอยู่ที่หน้า Dashboard
