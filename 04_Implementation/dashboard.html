@@ -29,14 +29,13 @@
                 <label class="input-label">GENDER</label>
                 <div class="gender-selection">
                     <div class="gender-card" id="gender-male" onclick="selectGender('male')">
-                    <img src="assets/male_icon.png" alt="Male" class="gender-img"> 
-                    <span class="gender-label">MALE</span>
-                </div>
-
-                <div class="gender-card" id="gender-female" onclick="selectGender('female')">
-                    <img src="assets/female_icon.png" alt="Female" class="gender-img">
-                    <span class="gender-label">FEMALE</span>
-                </div>
+                        <img src="assets/male_icon.png" alt="Male" class="gender-img"> 
+                        <span class="gender-label">MALE</span>
+                    </div>
+                    <div class="gender-card" id="gender-female" onclick="selectGender('female')">
+                        <img src="assets/female_icon.png" alt="Female" class="gender-img">
+                        <span class="gender-label">FEMALE</span>
+                    </div>
                 </div>
 
                 <label class="input-label">AGE</label>
@@ -75,11 +74,11 @@
                     <tr>
                         <th>Date</th>
                         <th>Age</th>
-                        <th>Height(cm)</th>
-                        <th>Weight(kg)</th>
-                        <th>BMI</th>
+                        <th>Height</th>
+                        <th>Weight</th>
+                        <th>Gender</th> <th>BMI</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th>Advice</th> <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="history-list">
@@ -88,8 +87,10 @@
                         <td>20</td>
                         <td>170</td>
                         <td>60</td>
+                        <td>Male</td>
                         <td>20.7</td>
                         <td><span class="status-badge normal">Normal</span></td>
+                        <td><button class="view-btn" onclick="openModal('ตัวอย่างคำแนะนำ: ควรออกกำลังกายวันละ 30 นาที')">VIEW</button></td>
                         <td><button class="delete-btn">🗑️</button></td>
                     </tr>
                 </tbody>
@@ -98,6 +99,14 @@
 
     </div>
 
+    <div id="advice-modal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">HEALTH ADVICE</h3>
+            <p id="modal-text" class="modal-body">
+                ...
+            </p>
+            <button class="modal-close-btn" onclick="closeModal()">CLOSE</button>
+        </div>
+    </div>
+
     <script src="app.js"></script>
-</body>
-</html>
