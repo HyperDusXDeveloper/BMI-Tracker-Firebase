@@ -158,30 +158,46 @@ function calculateBMI() {
 }
 
 // ฟังก์ชันดึงประวัติ (Load History)
+// app.js (แก้ไขฟังก์ชัน loadHistory)
+
 function loadHistory(uid) {
     const historyList = document.getElementById('history-list');
     if (!historyList) return;
 
-    // สั่งดึงข้อมูลจาก collection 'bmi_records' ที่ uid ตรงกับเรา เรียงตามเวลาล่าสุด
+    // ล้างข้อมูลเก่าทิ้งก่อน (จะได้ไม่ซ้อนกัน)
+    historyList.innerHTML = "";
+
+    console.log("กำลังดึงข้อมูลของ UID:", uid);
+
+    // ดึงข้อมูลแบบง่าย (ตัด orderBy ออกก่อน เพื่อลดปัญหา Index)
     db.collection("bmi_records")
         .where("uid", "==", uid)
         .orderBy("timestamp", "desc")
-        .limit(10) // เอาแค่ 10 รายการล่าสุด
+        .limit(10)
         .get()
         .then((querySnapshot) => {
+            if (querySnapshot.empty) {
+                console.log("ไม่พบข้อมูลประวัติ");
+                historyList.innerHTML = "<tr><td colspan='9'>ไม่พบประวัติการบันทึก</td></tr>";
+                return;
+            }
+
             let html = "";
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
-                // แปลง timestamp เป็นวันที่สวยๆ
-                const date = data.timestamp ? data.timestamp.toDate().toLocaleDateString('th-TH') : "-";
+                // แปลง timestamp เป็นวันที่
+                let date = "-";
+                if (data.timestamp) {
+                    date = new Date(data.timestamp.seconds * 1000).toLocaleString('th-TH');
+                }
                 
                 // กำหนดสีปุ่ม Badge
                 let badgeClass = "normal";
-                if(data.status.includes("Under")) badgeClass = "under"; // คุณต้องไปเพิ่ม css class .under เอาเองนะ (เช่น สีเหลือง)
-                else if(data.status.includes("Over")) badgeClass = "over";
-                else if(data.status.includes("Obese")) badgeClass = "obese";
+                if (data.status.includes("Under")) badgeClass = "under";
+                else if (data.status.includes("Over")) badgeClass = "over";
+                else if (data.status.includes("Obese")) badgeClass = "obese";
 
-                // สร้างแถวตาราง
+                // สร้างแถวตาราง (ใช้ Backtick ` )
                 html += `
                 <tr>
                     <td>${date}</td>
@@ -197,12 +213,13 @@ function loadHistory(uid) {
                 `;
             });
             historyList.innerHTML = html;
+            console.log("โหลดประวัติเสร็จสิ้น!");
         })
         .catch((error) => {
             console.error("โหลดประวัติไม่สำเร็จ:", error);
+            // *** สำคัญ: ถ้า Error ให้ดูใน Console ***
         });
 }
-
 // ฟังก์ชันลบข้อมูล (Delete)
 function deleteRecord(docId) {
     if(confirm("ต้องการลบรายการนี้ใช่ไหม?")) {

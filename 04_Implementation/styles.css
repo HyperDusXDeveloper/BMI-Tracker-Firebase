@@ -169,6 +169,18 @@ body {
 }
 .status-badge { padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; color: white; text-transform: uppercase; }
 .status-badge.normal { background: #28a745; }
+
+/* สีเหลือง (ผอม) */
+.status-badge.under { 
+    background: #ffc107; 
+    color: #333; /* เปลี่ยนตัวหนังสือเป็นสีดำ จะได้อ่านง่ายบนพื้นเหลือง */
+}
+
+/* สีส้ม (ท้วม) */
+.status-badge.over { background: #fd7e14; }
+
+/* สีแดง (อ้วน) */
+.status-badge.obese { background: #dc3545; }
 .delete-btn { border: none; background: none; cursor: pointer; font-size: 18px; opacity: 0.5; transition: 0.2s; }
 .delete-btn:hover { opacity: 1; transform: scale(1.2); }
 
