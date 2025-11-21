@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <img src="assets/logo.png" alt="Logo" class="nav-logo">
+        </div>
+        <div class="nav-user">
+            <img id="user-profile-pic" src="https://via.placeholder.com/40" alt="User" class="user-pic">
+            <button id="logout-btn" class="logout-btn">LOG OUT</button>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        
+        <h2 class="section-title">BMI CALCULATOR</h2>
+
+        <div class="calculator-grid">
+            
+            <div class="calc-card input-section">
+                <label class="input-label">GENDER</label>
+                <div class="gender-selection">
+                    <div class="gender-card active" id="gender-male" onclick="selectGender('male')">
+                        <span>👨 MALE</span>
+                    </div>
+                    <div class="gender-card" id="gender-female" onclick="selectGender('female')">
+                        <span>👩 FEMALE</span>
+                    </div>
+                </div>
+
+                <label class="input-label">AGE</label>
+                <input type="number" class="input-field" placeholder="20" id="age">
+
+                <div class="row">
+                    <div class="col">
+                        <label class="input-label">WEIGHT <span class="unit">KG</span></label>
+                        <input type="number" class="input-field" placeholder="60" id="weight">
+                    </div>
+                    <div class="col">
+                        <label class="input-label">HEIGHT <span class="unit">CM</span></label>
+                        <input type="number" class="input-field" placeholder="170" id="height">
+                    </div>
+                </div>
+
+                <button class="calc-btn" onclick="calculateBMI()">CALCULATE</button>
+            </div>
+
+            <div class="calc-card result-section">
+                <h3>RESULT</h3>
+                <div class="bmi-value" id="bmi-value">--.-</div>
+                <div class="bmi-status" id="bmi-status">Waiting...</div>
+                
+                <div class="recommendation-box">
+                    <h4>RECOMMENDED</h4>
+                    <p id="bmi-advice">Please enter your details and press calculate.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <h3 class="section-title">BMI CALCULATOR HISTORY</h3>
+            
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Age</th>
+                        <th>Height(cm)</th>
+                        <th>Weight(kg)</th>
+                        <th>BMI</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="history-list">
+                    <tr>
+                        <td>22/11/2025</td>
+                        <td>20</td>
+                        <td>170</td>
+                        <td>60</td>
+                        <td>20.7</td>
+                        <td><span class="status-badge normal">Normal</span></td>
+                        <td><button class="delete-btn">🗑️</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // โค้ดชั่วคราวสำหรับเลือกเพศ (เดี๋ยวค่อยย้ายไป app.js)
+        function selectGender(gender) {
+            document.querySelectorAll('.gender-card').forEach(c => c.classList.remove('active'));
+            document.getElementById('gender-' + gender).classList.add('active');
+        }
+    </script>
+</body>
+</html>
