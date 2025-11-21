@@ -37,7 +37,8 @@
 * **Input:** กดปุ่ม **LOG OUT** ที่มุมขวาบนของหน้าจอ
 * **Expected Result:** ระบบต้องพาผู้ใช้กลับไปที่หน้า Login (หน้าแรก) และไม่สามารถกด Back กลับมาหน้า Dashboard ได้โดยไม่ล็อกอินใหม่
 * **Actual Result:** ระบบเด้งกลับไปหน้า Login สำเร็จ -> **Pass**
-* **Evidence:** ![Logout Success](Test_Evidence/TC-10_Logout_Success.png)
+* **Evidence TC-10_Logout_Success_01 :** ![Logout Success](Test_Evidence/TC-10_Logout_Success_01.png)
+* **Evidence TC-10_Logout_Success_02 :** ![Logout Success](Test_Evidence/TC-10_Logout_Success_02.png)
 
 ---
 
@@ -81,7 +82,8 @@
 * **Input:** กดปุ่มรูปถังขยะ 🗑️ ที่รายการแถวแรก และกด OK ยืนยัน
 * **Expected Result:** รายการแถวแรกหายไปจากตารางทันที
 * **Actual Result:** รายการถูกลบออกไปจริง -> **Pass**
-* **Evidence:** ![Delete Success](Test_Evidence/TC-07_Delete_Success.png)
+* **Evidence TC-07_Delete_Success_01 :** ![Delete Success](Test_Evidence/TC-07_Delete_Success_01.png)
+* **Evidence TC-07_Delete_Success_02 :** ![Delete Success](Test_Evidence/TC-07_Delete_Success_02.png)
 
 ---
 
@@ -97,4 +99,6 @@
 * **Input:** ปรับขนาดหน้าจอ Browser ให้เล็กลงเท่ามือถือ (หรือใช้ DevTools Mode iPhone)
 * **Expected Result:** การจัดวางเปลี่ยนเป็นแนวตั้ง (Stack), ตารางสามารถเลื่อนซ้าย-ขวาได้ไม่ล้นจอ
 * **Actual Result:** หน้าจอแสดงผลบนมือถือได้ดี ไม่พัง -> **Pass**
-* **Evidence:** ![Mobile View](Test_Evidence/TC-08_Mobile_View.png)
+* **Evidence TC-08_Mobile_View_01 :** ![Mobile View](Test_Evidence/TC-08_Mobile_View_01.png)
+* **Evidence TC-08_Mobile_View_02 :** ![Mobile View](Test_Evidence/TC-08_Mobile_View_02.png)
+* **Evidence TC-08_Mobile_View_03 :** ![Mobile View](Test_Evidence/TC-08_Mobile_View_03.png)
