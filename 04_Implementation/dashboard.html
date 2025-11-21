@@ -14,7 +14,7 @@
             <img src="assets/logo.png" alt="Logo" class="nav-logo">
         </div>
         <div class="nav-user">
-            <img id="user-profile-pic" src="https://via.placeholder.com/40" alt="User" class="user-pic">
+            <img id="user-profile-pic" src="assets/logo.png" alt="User" class="user-pic">
             <button id="logout-btn" class="logout-btn">LOG OUT</button>
         </div>
     </nav>
@@ -28,11 +28,13 @@
             <div class="calc-card input-section">
                 <label class="input-label">GENDER</label>
                 <div class="gender-selection">
-                    <div class="gender-card active" id="gender-male" onclick="selectGender('male')">
-                        <span>👨 MALE</span>
+                    <div class="gender-card" id="gender-male" onclick="selectGender('male')">
+                        <img src="assets/icon-male.png" alt="Male" class="gender-img"> 
+                        <span class="gender-label">MALE</span>
                     </div>
                     <div class="gender-card" id="gender-female" onclick="selectGender('female')">
-                        <span>👩 FEMALE</span>
+                        <img src="assets/icon-female.png" alt="Female" class="gender-img">
+                        <span class="gender-label">FEMALE</span>
                     </div>
                 </div>
 
@@ -67,7 +69,6 @@
 
         <div class="history-section">
             <h3 class="section-title">BMI CALCULATOR HISTORY</h3>
-            
             <table class="history-table">
                 <thead>
                     <tr>
@@ -97,12 +98,5 @@
     </div>
 
     <script src="app.js"></script>
-    <script>
-        // โค้ดชั่วคราวสำหรับเลือกเพศ (เดี๋ยวค่อยย้ายไป app.js)
-        function selectGender(gender) {
-            document.querySelectorAll('.gender-card').forEach(c => c.classList.remove('active'));
-            document.getElementById('gender-' + gender).classList.add('active');
-        }
-    </script>
 </body>
 </html>

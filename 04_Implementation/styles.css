@@ -108,3 +108,141 @@ body {
     width: 350px;           /* กำหนดความกว้างแทน */
     max-width: 100%;        /* กันไม่ให้ล้นจอมือถือ */
 }
+/* --- ส่วนเพิ่มเติมสำหรับ Dashboard --- */
+
+/* --- Navbar อัปเกรด --- */
+.navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 80px; /* เพิ่มความสูงนิดนึง */
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    z-index: 100;
+}
+
+.nav-logo { height: 40px; }
+
+/* จัดกลุ่ม User ฝั่งขวา */
+.nav-user { 
+    display: flex; 
+    align-items: center; 
+    gap: 30px; /* ระยะห่างระหว่างรูปกับปุ่ม */
+}
+
+/* รูปโปรไฟล์ */
+.user-pic { 
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    /* สร้างเส้นขีดกั้น (Vertical Divider) ด้านขวาของรูป */
+    border-right: 2px solid #eee; 
+    padding-right: 30px; /* ดันเส้นออกไป */
+    margin-right: -10px; /* ปรับระยะนิดหน่อย */
+}
+
+/* ปุ่ม Logout (ทรงแคปซูลขอบแดง) */
+.logout-btn {
+    border: 2px solid #FF3D00; /* ขอบสีแดงสด */
+    color: #FF3D00; /* ตัวหนังสือสีแดง */
+    background: transparent;
+    padding: 10px 30px; /* ปุ่มยาวๆ */
+    border-radius: 50px; /* ทรงแคปซูล */
+    cursor: pointer; 
+    font-weight: 700; /* ตัวหนา */
+    font-size: 14px;
+    letter-spacing: 2px; /* ระยะห่างตัวอักษร */
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover { 
+    background: #FF3D00; 
+    color: white; 
+    box-shadow: 0 5px 15px rgba(255, 61, 0, 0.2);
+}
+/* Dashboard Layout */
+.dashboard-container {
+    margin-top: 100px; /* เว้นที่ให้ Navbar */
+    width: 90%;
+    max-width: 1000px;
+    margin-left: auto; margin-right: auto;
+    padding-bottom: 50px;
+}
+.section-title { text-align: center; margin-bottom: 30px; letter-spacing: 1px; color: #333; }
+
+/* Grid ซ้ายขวา */
+.calculator-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* แบ่งครึ่ง */
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+/* Card Styling */
+.calc-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+}
+
+/* Inputs */
+.input-label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 10px; color: #555; text-transform: uppercase;}
+.unit { color: #FF5733; font-size: 10px; vertical-align: super; }
+.input-field {
+    width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 10px;
+    font-size: 18px; text-align: center; margin-bottom: 20px; outline: none;
+}
+.input-field:focus { border-color: #FF5733; }
+
+/* Gender Selection */
+.gender-selection { display: flex; gap: 15px; margin-bottom: 20px; }
+.gender-card {
+    flex: 1; border: 1px solid #ddd; border-radius: 10px; padding: 15px;
+    text-align: center; cursor: pointer; transition: 0.2s;
+}
+.gender-card.active { border-color: #FF5733; background: #FFF5F2; color: #FF5733; font-weight: bold; }
+
+/* Row Col for Weight/Height */
+.row { display: flex; gap: 15px; }
+.col { flex: 1; }
+
+/* Calculate Button */
+.calc-btn {
+    width: 100%; background: #FF5733; color: white; border: none;
+    padding: 15px; border-radius: 10px; font-size: 18px; font-weight: bold;
+    cursor: pointer; transition: 0.2s; margin-top: 10px;
+}
+.calc-btn:hover { background: #e04e2e; box-shadow: 0 5px 15px rgba(255, 87, 51, 0.3); }
+
+/* Result Section */
+.result-section { text-align: center; display: flex; flex-direction: column; justify-content: center; }
+.bmi-value { font-size: 80px; font-weight: bold; line-height: 1; margin: 20px 0; color: #333; }
+.bmi-status { font-size: 24px; font-weight: 600; letter-spacing: 2px; color: #FF5733; margin-bottom: 30px; }
+.recommendation-box { background: #f9f9f9; padding: 20px; border-radius: 10px; text-align: left; border-left: 5px solid #aaa;}
+.recommendation-box h4 { margin-bottom: 10px; color: #555; }
+
+/* History Table */
+.history-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+.history-table th, .history-table td { padding: 15px; text-align: center; border-bottom: 1px solid #eee; }
+.history-table th { background: #333; color: white; font-weight: 600; text-transform: uppercase; font-size: 14px; }
+.status-badge { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; color: white; }
+.status-badge.normal { background: #28a745; }
+.delete-btn { border: none; background: none; cursor: pointer; font-size: 18px; }
+
+/* Responsive Dashboard */
+@media (max-width: 768px) {
+    .calculator-grid { grid-template-columns: 1fr; }
+    .nav-brand img { height: 30px; }
+    .history-table { display: block; overflow-x: auto; }
+}
+.gender-img {
+    width: 40px; /* ปรับขนาดตามความเหมาะสม */
+    height: 40px;
+    object-fit: contain;
+}
