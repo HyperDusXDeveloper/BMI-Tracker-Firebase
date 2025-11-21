@@ -29,7 +29,15 @@ body {
 
 .side-image { flex: 1; display: flex; justify-content: center; align-items: center; }
 .side-image img { height: 400px; width: auto; max-width: 100%; object-fit: contain; }
-.side-image img.scale-img { height: auto !important; width: 350px; }
+/* ปรับขนาดรูปตาชั่งให้เล็กลง */
+.side-image img.scale-img {
+    height: auto !important;
+    width: 200px;  /* <-- ลองใส่เลขนี้ดูครับ (หรือ 220px ก็ได้) */
+    max-width: 100%;
+    
+    /* แถม: ขยับตำแหน่งให้ดูดีขึ้น (ถ้าต้องการ) */
+    object-fit: contain; 
+}
 
 .login-content {
     flex: 0 0 400px; text-align: center;
