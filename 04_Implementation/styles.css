@@ -86,7 +86,33 @@ body {
     width: 90%; max-width: 1000px;
     margin-left: auto; margin-right: auto; padding-bottom: 50px;
 }
-.section-title { text-align: center; margin-bottom: 30px; letter-spacing: 1px; color: #333; font-weight: 700; text-transform: uppercase; }
+/* --- แก้ไขหัวข้อให้มีเส้นขีดแดง (Section Title) --- */
+.section-title {
+    text-align: center;
+    margin-bottom: 40px; /* เพิ่มระยะห่างด้านล่างอีกนิด */
+    letter-spacing: 2px; /* เพิ่มระยะห่างตัวอักษร */
+    color: #333;
+    font-weight: 800; /* ตัวหนาพิเศษ */
+    text-transform: uppercase;
+    font-size: 28px; /* ใหญ่ขึ้นอีกหน่อย */
+    
+    /* เทคนิคสร้างเส้นขีดแดง */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* ระยะห่างระหว่างเส้นกับตัวหนังสือ */
+}
+
+/* สร้างเส้นขีดข้างหน้า (::before) และข้างหลัง (::after) */
+.section-title::before,
+.section-title::after {
+    content: "";
+    display: block;
+    width: 50px;  /* ความยาวของเส้น */
+    height: 3px;  /* ความหนาของเส้น */
+    background-color: #FF5733; /* สีแดงส้ม */
+    border-radius: 2px; /* ลบเหลี่ยมปลายเส้นนิดนึง */
+}
 
 /* Grid System */
 .calculator-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 50px; }
