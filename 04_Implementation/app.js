@@ -1,4 +1,4 @@
-// app.js - ฉบับเชื่อมต่อ Firebase สมบูรณ์
+// app.js - ฉบับเชื่อมต่อ Firebase สมบูรณ์ + เนื้อหาละเอียด + แก้ไขเวลา
 
 // -------------------------------------------------
 // 1. การตั้งค่า Firebase (เอา Config ของคุณมาใส่ตรงนี้!)
@@ -25,25 +25,19 @@ console.log("Firebase เชื่อมต่อแล้ว!");
 // -------------------------------------------------
 auth.onAuthStateChanged((user) => {
     const path = window.location.pathname;
-    const page = path.split("/").pop(); // ชื่อไฟล์ปัจจุบัน (index.html หรือ dashboard.html)
+    const page = path.split("/").pop();
 
     if (user) {
         console.log("ผู้ใช้ล็อกอินอยู่:", user.email);
-        
-        // ถ้าล็อกอินแล้ว แต่อยู่หน้า Login -> ดีดไปหน้า Dashboard
         if (page === "index.html" || page === "") {
             window.location.href = "dashboard.html";
         }
-
-        // ถ้าอยู่หน้า Dashboard -> โหลดข้อมูลผู้ใช้และประวัติ
         if (page === "dashboard.html") {
             setupUserProfile(user);
             loadHistory(user.uid);
         }
-
     } else {
         console.log("ยังไม่ได้ล็อกอิน");
-        // ถ้ายังไม่ล็อกอิน แต่อยู่หน้า Dashboard -> ดีดกลับไปหน้า Login
         if (page === "dashboard.html") {
             window.location.href = "index.html";
         }
@@ -60,7 +54,6 @@ if (loginBtn) {
         auth.signInWithPopup(provider)
             .then((result) => {
                 console.log("Login สำเร็จ!", result.user);
-                // ไม่ต้องสั่ง Redirect เพราะ onAuthStateChanged จะทำงานเอง
             })
             .catch((error) => {
                 console.error("Login ผิดพลาด:", error);
@@ -73,15 +66,12 @@ if (loginBtn) {
 // 4. ฟังก์ชันสำหรับหน้า Dashboard
 // -------------------------------------------------
 
-// ตั้งค่ารูปและชื่อโปรไฟล์
 function setupUserProfile(user) {
     const profilePic = document.getElementById('user-profile-pic');
     if (profilePic) {
-        // ถ้า user มีรูป ให้ใช้รูป Google ถ้าไม่มีให้ใช้รูป default
         profilePic.src = user.photoURL || "assets/profile.png";
     }
     
-    // ปุ่ม Logout
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
@@ -92,7 +82,6 @@ function setupUserProfile(user) {
     }
 }
 
-// ฟังก์ชันเลือกเพศ (เหมือนเดิม)
 function selectGender(gender) {
     document.getElementById('gender-male').classList.remove('active');
     document.getElementById('gender-female').classList.remove('active');
@@ -100,45 +89,150 @@ function selectGender(gender) {
     if(btn) btn.classList.add('active');
 }
 
-// ฟังก์ชันคำนวณและบันทึก (หัวใจสำคัญ!)
 function calculateBMI() {
-    // 1. ดึงค่า
+    // 1. ดึงค่าและตรวจสอบ
     const weight = document.getElementById('weight').value;
     const height = document.getElementById('height').value;
     const genderBtn = document.querySelector('.gender-card.active');
 
-    // Validation
     if(!weight || !height) { alert("กรุณากรอกข้อมูลให้ครบ!"); return; }
-    if(!genderBtn) { alert("กรุณาเลือกเพศ!"); return; }
+    if(!genderBtn) { alert("กรุณาระบุเพศก่อนคำนวณ!"); return; }
 
-    // 2. คำนวณ
+    // 2. คำนวณ BMI
     const h_meter = height / 100;
     const bmi = (weight / (h_meter * h_meter)).toFixed(1);
-    const gender = genderBtn.id.replace("gender-", ""); // 'male' หรือ 'female'
+    const gender = genderBtn.id.replace("gender-", "");
 
-    // 3. แปลผล
+    // 3. แปลผล (5 ระดับ ตามข้อมูลใหม่)
     let status = "", advice = "", color = "";
+
     if (bmi < 18.5) {
-        status = "Underweight"; advice = "น้ำหนักน้อยเกินไป ควรทานอาหารเพิ่มโปรตีนและแป้ง"; color = "#FFC107";
-    } else if (bmi < 24.9) {
-        status = "Normal"; advice = "สุขภาพดีมาก! ควรรักษาหุ่นด้วยการออกกำลังกายสม่ำเสมอ"; color = "#28A745";
-    } else if (bmi < 29.9) {
-        status = "Overweight"; advice = "เริ่มอ้วนแล้ว ควรลดของหวาน/ของทอด และเดินเร็ววันละ 30 นาที"; color = "#FD7E14";
-    } else {
-        status = "Obese"; advice = "อ้วนอันตราย ควรปรึกษาแพทย์และควบคุมอาหารอย่างจริงจัง"; color = "#DC3545";
+        // --- 1) ผอมมาก ---
+        status = "Very Underweight";
+        color = "#1976D2"; // สีน้ำเงินเข้ม
+        advice = `
+            <strong style="color:#1976D2;">✔ เป้าหมาย:</strong>
+            <ul><li>เพิ่มน้ำหนักแบบสุขภาพดี เน้นเพิ่ม "กล้ามเนื้อ" ไม่ใช่ไขมันล้วน</li></ul>
+            <strong style="color:#1976D2;">✔ อาหาร:</strong>
+            <ul>
+                <li>เพิ่มพลังงานจากปกติ 300–500 kcal/วัน</li>
+                <li>เน้นโปรตีน: ไก่, ไข่, ปลา, เต้าหู้, นม</li>
+                <li>เพิ่มคาร์บดีๆ: ข้าวกล้อง, ขนมปังโฮลวีต, มันหวาน</li>
+                <li>ของว่างที่ดี: กล้วย 1–2 ลูก, นม, ถั่ว</li>
+                <li>กินให้ครบ 3 มื้อ + เสริมอีก 1–2 มื้อ</li>
+            </ul>
+            <strong style="color:#1976D2;">✔ ออกกำลังกาย:</strong>
+            <ul>
+                <li>เวทเทรนนิ่ง 3–4 วัน/สัปดาห์ (น้ำหนักเบา–กลาง)</li>
+                <li>คาร์ดิโอเบาๆ 10–15 นาที (เพื่อกระตุ้นระบบ ไม่เผาผลาญเกิน)</li>
+                <li>ฝึกพื้นฐาน: Squat, Push-up, Rowing, Hip hinge</li>
+            </ul>
+        `;
+    } 
+    else if (bmi >= 18.5 && bmi < 20) {
+        // --- 2) ผอม (ช่วงต้น) ---
+        status = "Underweight";
+        color = "#42A5F5"; // สีฟ้าอ่อน
+        advice = `
+            <strong style="color:#42A5F5;">✔ เป้าหมาย:</strong>
+            <ul><li>ปรับร่างกายให้สมดุล + เพิ่มมวลกล้ามเนื้อเล็กน้อย</li></ul>
+            <strong style="color:#42A5F5;">✔ อาหาร:</strong>
+            <ul>
+                <li>เพิ่มพลังงาน 200–300 kcal/วัน</li>
+                <li>โปรตีน 1–1.2 g/กก. น้ำหนักตัว</li>
+                <li>เพิ่มคาร์บเชิงซ้อนเพื่อเก็บพลังงาน</li>
+                <li>แบ่งมื้ออาหารให้สม่ำเสมอ</li>
+            </ul>
+            <strong style="color:#42A5F5;">✔ ออกกำลังกาย:</strong>
+            <ul>
+                <li>เวทเทรนนิ่ง 2–3 วัน/สัปดาห์</li>
+                <li>คาร์ดิโอปานกลาง 20–25 นาที (2–3 วัน)</li>
+                <li>เน้นฟื้นฟูกล้ามเนื้อ และเพิ่มความแข็งแรงแกนกลางลำตัว</li>
+            </ul>
+        `;
+    } 
+    else if (bmi >= 20 && bmi < 23) {
+        // --- 3) ปกติ ---
+        status = "Normal";
+        color = "#28A745"; // สีเขียว
+        advice = `
+            <strong style="color:#28A745;">✔ เป้าหมาย:</strong>
+            <ul><li>รักษาน้ำหนัก + พัฒนาคุณภาพร่างกาย</li></ul>
+            <strong style="color:#28A745;">✔ อาหาร:</strong>
+            <ul>
+                <li>โปรตีน 1–1.2 g/กก. น้ำหนักตัว</li>
+                <li>เน้นอาหารจริง ลดของหวาน น้ำตาล ไขมันทรานส์</li>
+                <li>ควบคุมสัดส่วน: ½ ผัก, ¼ โปรตีน, ¼ คาร์บดี</li>
+            </ul>
+            <strong style="color:#28A745;">✔ ออกกำลังกาย:</strong>
+            <ul>
+                <li>เวทเทรนนิ่ง 2–3 วัน</li>
+                <li>คาร์ดิโอ 150 นาที/สัปดาห์</li>
+                <li>โยคะหรือยืดเหยียดเพิ่มความคล่องตัว 1–2 วัน</li>
+            </ul>
+        `;
+    } 
+    else if (bmi >= 23 && bmi < 25) {
+        // --- 4) น้ำหนักเกิน ---
+        status = "Overweight";
+        color = "#FFC107"; // สีเหลือง (ใช้สีเข้มหน่อยให้อ่านง่าย)
+        advice = `
+            <strong style="color:#F57F17;">✔ เป้าหมาย:</strong>
+            <ul><li>ลดไขมัน + เพิ่มกล้ามเนื้อเบื้องต้น</li></ul>
+            <strong style="color:#F57F17;">✔ อาหาร:</strong>
+            <ul>
+                <li>ลดพลังงาน 250–300 kcal/วัน</li>
+                <li>เน้นโปรตีนเยอะขึ้นเพื่อความอิ่มนาน</li>
+                <li>ผักมากขึ้น ลดน้ำหวาน ของทอด ขนม</li>
+                <li>เน้นคาร์บเชิงซ้อน เช่น ข้าวกล้อง ฟักทอง มันม่วง</li>
+            </ul>
+            <strong style="color:#F57F17;">✔ ออกกำลังกาย:</strong>
+            <ul>
+                <li>เดินเร็ว 30–45 นาที</li>
+                <li>เวทเทรนนิ่งเบา–กลาง 2–3 วัน/สัปดาห์</li>
+                <li>หากร่างกายไหว: HIIT แบบเบา 1–2 วัน</li>
+            </ul>
+        `;
+    } 
+    else {
+        // --- 5) อ้วน (>= 25) ---
+        status = "Obese";
+        color = "#DC3545"; // สีแดง
+        advice = `
+            <strong style="color:#DC3545;">✔ เป้าหมาย:</strong>
+            <ul><li>ลดไขมันอย่างปลอดภัย + ปรับพฤติกรรมระยะยาว</li></ul>
+            <strong style="color:#DC3545;">✔ อาหาร:</strong>
+            <ul>
+                <li>ลดพลังงาน 400–600 kcal/วัน</li>
+                <li>โปรตีนสูง 1.2–1.5 g/กก. เพื่อคงกล้ามเนื้อ</li>
+                <li>ลดน้ำตาล ของทอด เบเกอรี่ ชาไข่มุก</li>
+                <li>ดื่มน้ำ 1.5–2 ลิตร/วัน</li>
+                <li>แบ่งอาหารเป็นมื้อเล็กๆ 4–5 มื้อเพื่อลดหิว</li>
+            </ul>
+            <strong style="color:#DC3545;">✔ ออกกำลังกาย:</strong>
+            <ul>
+                <li>เลือกแรงกระแทกต่ำ (Low Impact): เดินเร็ว, ปั่นจักรยาน, ว่ายน้ำ</li>
+                <li>เวทเทรนนิ่ง 2–3 วัน/สัปดาห์ (เพิ่มมวลกล้ามเนื้อ)</li>
+                <li>ค่อยๆ เพิ่มคาร์ดิโอเป็น 200–250 นาที/สัปดาห์</li>
+            </ul>
+        `;
     }
 
     // 4. แสดงผลหน้าจอ
     document.getElementById('bmi-value').innerText = bmi;
-    document.getElementById('bmi-status').innerText = status;
-    document.getElementById('bmi-status').style.color = color;
-    document.getElementById('bmi-advice').innerText = advice;
+    
+    const statusElement = document.getElementById('bmi-status');
+    statusElement.innerText = status;
+    statusElement.style.color = color;
 
-    // 5. บันทึกลง Firebase Firestore ☁️
+    // ใช้ innerHTML เพื่อให้แสดง HTML Tags ได้
+    document.getElementById('bmi-advice').innerHTML = advice;
+
+    // 5. บันทึกลง Firebase
     const user = auth.currentUser;
     if (user) {
         db.collection("bmi_records").add({
-            uid: user.uid,         // บันทึกว่าเป็นของใคร
+            uid: user.uid,
             weight: Number(weight),
             height: Number(height),
             age: Number(document.getElementById('age').value) || 0,
@@ -146,30 +240,21 @@ function calculateBMI() {
             bmi: Number(bmi),
             status: status,
             advice: advice,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp() // เวลาปัจจุบันจาก Server
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }).then(() => {
-            console.log("บันทึกข้อมูลสำเร็จ!");
-            // โหลดตารางใหม่ทันที (เพื่อให้เห็นข้อมูลล่าสุด)
+            console.log("บันทึกสำเร็จ!");
             loadHistory(user.uid);
-        }).catch((error) => {
-            console.error("บันทึกไม่สำเร็จ:", error);
-        });
+        }).catch((err) => console.error("Error:", err));
     }
 }
 
 // ฟังก์ชันดึงประวัติ (Load History)
-// app.js (แก้ไขฟังก์ชัน loadHistory)
-
 function loadHistory(uid) {
     const historyList = document.getElementById('history-list');
     if (!historyList) return;
 
-    // ล้างข้อมูลเก่าทิ้งก่อน (จะได้ไม่ซ้อนกัน)
     historyList.innerHTML = "";
 
-    console.log("กำลังดึงข้อมูลของ UID:", uid);
-
-    // ดึงข้อมูลแบบง่าย (ตัด orderBy ออกก่อน เพื่อลดปัญหา Index)
     db.collection("bmi_records")
         .where("uid", "==", uid)
         .orderBy("timestamp", "desc")
@@ -177,7 +262,6 @@ function loadHistory(uid) {
         .get()
         .then((querySnapshot) => {
             if (querySnapshot.empty) {
-                console.log("ไม่พบข้อมูลประวัติ");
                 historyList.innerHTML = "<tr><td colspan='9'>ไม่พบประวัติการบันทึก</td></tr>";
                 return;
             }
@@ -185,19 +269,28 @@ function loadHistory(uid) {
             let html = "";
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
-                // แปลง timestamp เป็นวันที่
+                
+                // 1. แปลงวันที่และเวลา (แก้ไขตรงนี้)
                 let date = "-";
                 if (data.timestamp) {
-                    date = new Date(data.timestamp.seconds * 1000).toLocaleString('th-TH');
+                    date = new Date(data.timestamp.seconds * 1000).toLocaleString('th-TH'); 
                 }
                 
-                // กำหนดสีปุ่ม Badge
+                // 2. สี Badge
                 let badgeClass = "normal";
-                if (data.status.includes("Under")) badgeClass = "under";
-                else if (data.status.includes("Over")) badgeClass = "over";
-                else if (data.status.includes("Obese")) badgeClass = "obese";
+                if (data.status.includes("Under") || data.status.includes("ผอม")) badgeClass = "under";
+                else if (data.status.includes("Over") || data.status.includes("เกิน")) badgeClass = "over";
+                else if (data.status.includes("Obese") || data.status.includes("อ้วน")) badgeClass = "obese";
 
-                // สร้างแถวตาราง (ใช้ Backtick ` )
+                // 3. ล้าง "บรรทัดใหม่" และ "เครื่องหมายคำพูด" ออกก่อนใส่ปุ่ม
+                let safeAdvice = "";
+                if (data.advice) {
+                    safeAdvice = data.advice
+                        .replace(/(\r\n|\n|\r)/gm, "") 
+                        .replace(/"/g, "&quot;");      
+                }
+
+                // 4. สร้างแถวตาราง
                 html += `
                 <tr>
                     <td>${date}</td>
@@ -207,25 +300,23 @@ function loadHistory(uid) {
                     <td style="text-transform: capitalize;">${data.gender}</td>
                     <td>${data.bmi}</td>
                     <td><span class="status-badge ${badgeClass}">${data.status}</span></td>
-                    <td><button class="view-btn" onclick="openModal('${data.advice}')">VIEW</button></td>
+                    <td><button class="view-btn" onclick="openModal('${safeAdvice}')">VIEW</button></td>
                     <td><button class="delete-btn" onclick="deleteRecord('${doc.id}')">🗑️</button></td>
                 </tr>
                 `;
             });
             historyList.innerHTML = html;
-            console.log("โหลดประวัติเสร็จสิ้น!");
         })
         .catch((error) => {
-            console.error("โหลดประวัติไม่สำเร็จ:", error);
-            // *** สำคัญ: ถ้า Error ให้ดูใน Console ***
+            console.error("Error:", error);
         });
 }
+
 // ฟังก์ชันลบข้อมูล (Delete)
 function deleteRecord(docId) {
     if(confirm("ต้องการลบรายการนี้ใช่ไหม?")) {
         db.collection("bmi_records").doc(docId).delete().then(() => {
             console.log("ลบสำเร็จ!");
-            // รีโหลดตาราง
             loadHistory(auth.currentUser.uid);
         }).catch((error) => {
             console.error("ลบไม่สำเร็จ:", error);
@@ -233,14 +324,21 @@ function deleteRecord(docId) {
     }
 }
 
-// ฟังก์ชัน Modal (เหมือนเดิม)
-function openModal(text) {
-    document.getElementById('modal-text').innerText = text;
-    document.getElementById('advice-modal').style.display = 'flex';
+// ฟังก์ชัน Modal (แก้ไขให้ใช้ innerHTML)
+function openModal(adviceText) {
+    const modal = document.getElementById('advice-modal');
+    const modalText = document.getElementById('modal-text');
+    
+    if(modal && modalText) {
+        modalText.innerHTML = adviceText; // ใช้ innerHTML เพื่อแสดงผล HTML Tag
+        modal.style.display = 'flex';
+    }
 }
+
 function closeModal() {
     document.getElementById('advice-modal').style.display = 'none';
 }
+
 window.onclick = function(e) {
     if(e.target == document.getElementById('advice-modal')) closeModal();
 }
