@@ -341,4 +341,22 @@ function closeModal() {
 
 window.onclick = function(e) {
     if(e.target == document.getElementById('advice-modal')) closeModal();
-}
+}// ส่วนหัวข้อ (สีแดง ตัวใหญ่ มีเงา)
+console.log(
+  "%cBMI-Tracker-Firebase!", 
+  "color: yellow; font-size: 60px; font-weight: bold; text-shadow: 2px 2px 0px #000;"
+);
+
+// ส่วนเนื้อหา (ตัวหนังสือปกติ)
+console.log(
+  "%cCS436 Final Project BMI Tracker", 
+  "font-size: 18px; color: #e0e0e0; font-family: sans-serif;"
+);
+console.log(
+  "%cGithub Source Code https://github.com/HyperDusXDeveloper/BMI-Tracker-Firebase", 
+  "font-size: 18px; color: #e0e0e0; font-family: sans-serif;"
+);
+console.log(
+  "%cCanva Present https://www.canva.com/design/DAG5cEdoDwc/4-oSXpOxOdqkDlHNJJNlOQ/edit?utm_content=DAG5cEdoDwc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton", 
+  "font-size: 18px; color: #e0e0e0; font-family: sans-serif;"
+);
