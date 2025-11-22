@@ -1,0 +1,346 @@
+/* styles.css - ฉบับสมบูรณ์ (All-in-One) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+/* --- Login Page Styling --- */
+body {
+    background-color: #ffffff;
+    min-height: 100vh; /* ใช้ min-height เผื่อเนื้อหายาว */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* ให้เรียงลงมาแนวตั้ง (Navbar อยู่บน) */
+}
+
+/* เฉพาะหน้า Login ให้ซ่อน Navbar (ถ้ามี Class ซ่อน) แต่ปกติ Dashboard จะทับอยู่แล้ว */
+
+.login-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 50px; /* เผื่อที่ไว้ */
+}
+
+.side-image { flex: 1; display: flex; justify-content: center; align-items: center; }
+.side-image img { height: 400px; width: auto; max-width: 100%; object-fit: contain; }
+/* ปรับขนาดรูปตาชั่งให้เล็กลง */
+.side-image img.scale-img {
+    height: auto !important;
+    width: 200px;  /* <-- ลองใส่เลขนี้ดูครับ (หรือ 220px ก็ได้) */
+    max-width: 100%;
+    
+    /* แถม: ขยับตำแหน่งให้ดูดีขึ้น (ถ้าต้องการ) */
+    object-fit: contain; 
+}
+
+.login-content {
+    flex: 0 0 400px; text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+}
+.app-logo { width: 300px; margin-bottom: 20px; }
+.welcome-text { font-size: 18px; font-weight: 600; letter-spacing: 2px; margin-bottom: 30px; color: #333; text-transform: uppercase; }
+
+.google-btn {
+    display: flex; align-items: center; justify-content: center;
+    background: white; border: 1px solid #ccc; border-radius: 50px;
+    padding: 10px 20px; cursor: pointer; gap: 15px; width: 280px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: 0.3s;
+}
+.google-btn:hover { background-color: #f5f5f5; }
+.google-icon { width: 24px !important; height: 24px !important; }
+.google-btn span { font-size: 16px; font-weight: 500; color: #444; }
+
+
+/* --- Dashboard Styling --- */
+
+/* Navbar อัปเกรด */
+.navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 80px; background: white;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 50px; box-shadow: 0 2px 15px rgba(0,0,0,0.05); z-index: 100;
+}
+.nav-logo { height: 40px; }
+.nav-user { display: flex; align-items: center; gap: 20px; }
+
+/* รูปโปรไฟล์มีเส้นกั้น */
+/* แก้ไข CSS ส่วนรูปโปรไฟล์ */
+.user-pic { 
+    width: 45px; 
+    height: 45px; 
+    border-radius: 50%; 
+    object-fit: cover; /* คำสั่งนี้จะช่วยให้รูปไม่เบี้ยว แม้กรอบจะเปลี่ยน */
+    border: 2px solid #eee; /* ขอบกลมๆ รอบรูป */
+    
+    /* ลบ 3 บรรทัดเจ้าปัญหาออกไปแล้วครับ (padding-right / border-right) */
+}
+/* ปุ่ม Logout แคปซูล */
+.logout-btn {
+    border: 2px solid #FF3D00; color: #FF3D00; background: transparent;
+    padding: 8px 25px; border-radius: 50px; cursor: pointer; 
+    font-weight: 700; font-size: 14px; letter-spacing: 1px; transition: 0.3s;
+}
+.logout-btn:hover { background: #FF3D00; color: white; box-shadow: 0 5px 15px rgba(255, 61, 0, 0.2); }
+
+/* Dashboard Container */
+.dashboard-container {
+    margin-top: 120px; /* เว้นที่ให้ Navbar */
+    width: 90%; max-width: 1000px;
+    margin-left: auto; margin-right: auto; padding-bottom: 50px;
+}
+/* --- แก้ไขหัวข้อให้มีเส้นขีดแดง (Section Title) --- */
+.section-title {
+    text-align: center;
+    margin-bottom: 40px; /* เพิ่มระยะห่างด้านล่างอีกนิด */
+    letter-spacing: 2px; /* เพิ่มระยะห่างตัวอักษร */
+    color: #333;
+    font-weight: 800; /* ตัวหนาพิเศษ */
+    text-transform: uppercase;
+    font-size: 28px; /* ใหญ่ขึ้นอีกหน่อย */
+    
+    /* เทคนิคสร้างเส้นขีดแดง */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* ระยะห่างระหว่างเส้นกับตัวหนังสือ */
+}
+
+/* สร้างเส้นขีดข้างหน้า (::before) และข้างหลัง (::after) */
+.section-title::before,
+.section-title::after {
+    content: "";
+    display: block;
+    width: 50px;  /* ความยาวของเส้น */
+    height: 3px;  /* ความหนาของเส้น */
+    background-color: #FF5733; /* สีแดงส้ม */
+    border-radius: 2px; /* ลบเหลี่ยมปลายเส้นนิดนึง */
+}
+
+/* Grid System */
+.calculator-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 50px; }
+.calc-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #eee; }
+
+/* Inputs */
+.input-label { display: block; font-weight: 700; font-size: 13px; margin-bottom: 8px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; }
+.unit { color: #FF5733; font-size: 10px; vertical-align: super; }
+.input-field { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 10px; font-size: 18px; text-align: center; margin-bottom: 20px; outline: none; }
+.input-field:focus { border-color: #FF5733; }
+
+/* Gender Selection (แก้ไขรูปภาพ) */
+.gender-selection { display: flex; gap: 20px; margin-bottom: 25px; }
+.gender-card {
+    flex: 1; border: 2px solid #eee; border-radius: 15px; padding: 15px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    cursor: pointer; transition: 0.2s; background: white;
+}
+.gender-img { width: 30px; height: 30px; object-fit: contain; } /* คุมขนาดไอคอนเพศ */
+.gender-label { font-weight: 700; font-size: 14px; color: #555; }
+
+/* Active States */
+#gender-male.active { border-color: #2196F3; background: #E3F2FD; color: #1976D2; }
+#gender-female.active { border-color: #FF4081; background: #FCE4EC; color: #C2185B; }
+
+/* Other Inputs */
+.row { display: flex; gap: 15px; }
+.col { flex: 1; }
+
+.calc-btn {
+    width: 100%; background: #FF5733; color: white; border: none;
+    padding: 15px; border-radius: 10px; font-size: 18px; font-weight: bold;
+    cursor: pointer; transition: 0.2s; margin-top: 10px; box-shadow: 0 4px 0 #c0392b; /* ปุ่มนูนมีมิติ */
+}
+.calc-btn:hover { background: #e04e2e; transform: translateY(2px); box-shadow: 0 2px 0 #c0392b; }
+
+/* Result Section */
+.result-section { text-align: center; display: flex; flex-direction: column; justify-content: center; }
+.bmi-value { font-size: 80px; font-weight: 800; line-height: 1; margin: 20px 0; color: #333; }
+.bmi-status { font-size: 24px; font-weight: 700; letter-spacing: 1px; margin-bottom: 30px; }
+.recommendation-box { background: #f9f9f9; padding: 20px; border-radius: 10px; text-align: left; border-left: 5px solid #aaa; font-size: 14px; color: #555; }
+.recommendation-box h4 { margin-bottom: 5px; color: #333; font-weight: 700; text-transform: uppercase; font-size: 12px; }
+
+/* History Table */
+.history-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+.history-table th, .history-table td { padding: 15px; text-align: center; border-bottom: 1px solid #eee; }
+/* แก้ไขส่วนหัวตารางให้เป็นสีเทาเข้ม */
+.history-table th { 
+    background: #333333; /* <-- สีเทาเข้ม (Dark Gray) */
+    color: white; 
+    font-weight: 600; 
+    text-transform: uppercase; 
+    font-size: 14px; 
+}
+.status-badge { padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; color: white; text-transform: uppercase; }
+.status-badge.normal { background: #28a745; }
+
+/* สีเหลือง (ผอม) */
+.status-badge.under { 
+    background: #ffc107; 
+    color: #333; /* เปลี่ยนตัวหนังสือเป็นสีดำ จะได้อ่านง่ายบนพื้นเหลือง */
+}
+
+/* สีส้ม (ท้วม) */
+.status-badge.over { background: #fd7e14; }
+
+/* สีแดง (อ้วน) */
+.status-badge.obese { background: #dc3545; }
+.delete-btn { border: none; background: none; cursor: pointer; font-size: 18px; opacity: 0.5; transition: 0.2s; }
+.delete-btn:hover { opacity: 1; transform: scale(1.2); }
+
+@media (max-width: 768px) {
+    .calculator-grid { grid-template-columns: 1fr; }
+    .history-table { display: block; overflow-x: auto; }
+}
+.modal {
+    display: none; /* ซ่อนไว้ก่อน */
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5); /* พื้นหลังมืด */
+    backdrop-filter: blur(4px);
+    justify-content: center; align-items: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    width: 90%; max-width: 500px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-title {
+    color: #000; font-size: 20px; font-weight: 800;
+    margin-bottom: 20px; border-bottom: 2px solid #FF5733;
+    display: inline-block; padding: 0 10px;
+}
+
+.modal-body { font-size: 16px; color: #333; margin-bottom: 30px; line-height: 1.6; }
+
+.modal-close-btn {
+    background-color: #FF5733; color: white; border: none;
+    padding: 10px 30px; border-radius: 5px; font-weight: 700;
+    cursor: pointer; transition: 0.2s;
+}
+.modal-close-btn:hover { background-color: #e04e2e; }
+
+/* ปุ่ม VIEW สีฟ้า */
+.view-btn {
+    background-color: #4FC3F7; color: white; border: none;
+    padding: 5px 15px; border-radius: 5px; font-weight: 700;
+    font-size: 12px; cursor: pointer;
+}
+/* --- Animation Keyframes (ท่าทาง) --- */
+
+/* ท่าที่ 1: ค่อยๆ ชัดขึ้น (Fade In) */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ท่าที่ 2: เด้งขยายขึ้น (Pop Up) */
+@keyframes popUp {
+    0% { 
+        transform: scale(0.7); /* เริ่มจากเล็กๆ */
+        opacity: 0;
+    }
+    45% {
+        transform: scale(1.05); /* ขยายเกินนิดนึง (ให้ดูเด้ง) */
+        opacity: 1;
+    }
+    80% {
+        transform: scale(0.95); /* หดกลับนิดนึง */
+    }
+    100% { 
+        transform: scale(1); /* กลับมาขนาดปกติ */
+    }
+}
+/* --- จัดระเบียบเนื้อหาใน Modal ใหม่ (Style Upgrade) --- */
+
+/* 1. ปรับพื้นที่ข้อความให้ชิดซ้ายและอ่านง่าย */
+.modal-body {
+    text-align: left !important; /* บังคับชิดซ้าย */
+    padding: 0 15px;             /* เว้นขอบซ้ายขวา */
+    font-size: 15px;             /* ขนาดตัวอักษรกำลังดี */
+}
+
+/* 2. แต่งหัวข้อ (ตรงที่เป็น <strong>) ให้เหมือนแถบหัวข้อ */
+.modal-body strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    
+    /* เปลี่ยนสีตรงนี้ครับ */
+    color: #333333;              /* ตัวหนังสือสีเทาเข้มเกือบดำ */
+    background-color: #F5F5F5;   /* พื้นหลังสีเทาอ่อนสบายตา */
+    border-left: 5px solid #9E9E9E; /* เส้นขีดด้านซ้ายสีเทากลาง */
+    
+    padding: 8px 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* เพิ่มไอคอนหน้าหัวข้อ (ใช้ CSS สร้าง) */
+.modal-body strong::before {
+    content: "📌";              /* ไอคอนหมุด */
+    margin-right: 10px;          /* ห่างจากตัวหนังสือ */
+    font-size: 14px;
+}
+
+/* 3. จัดระเบียบลิสต์รายการ (<ul>) */
+.modal-body ul {
+    list-style: none;            /* เอาจุดดำแบบเดิมออก */
+    padding-left: 10px;          /* ขยับเข้ามานิดนึง */
+    margin: 0;
+}
+
+/* 4. แต่งแต่ละบรรทัด (<li>) */
+.modal-body li {
+    position: relative;          /* เตรียมที่วางไอคอน */
+    padding-left: 25px;          /* เว้นที่ด้านหน้าให้ไอคอน */
+    margin-bottom: 8px;          /* ระยะห่างแต่ละบรรทัด */
+    color: #444;                 /* สีตัวอักษรอ่านง่าย */
+    line-height: 1.6;            /* ระยะห่างระหว่างบรรทัด */
+}
+
+/* 5. สร้างจุดหน้าข้อความสวยๆ (Bullet Points) */
+.modal-body li::before {
+    content: "•";               /* ใส่จุดกลม (หรือจะใช้ "✔" ก็ได้) */
+    color: #FF5733;              /* สีส้มตามธีม */
+    font-size: 20px;             /* จุดใหญ่ๆ */
+    font-weight: bold;
+    position: absolute;
+    left: 5px;                   /* ตำแหน่งซ้ายสุด */
+    top: -4px;                   /* ขยับขึ้นนิดนึงให้ตรง */
+}
+
+/* --- ขยับรูปตาชั่งลงข้างล่าง --- */
+
+/* 1. เข้าถึงกล่องรูปฝั่งขวา */
+.side-image.right {
+    /* เปลี่ยนการจัดวางจาก "กึ่งกลาง" เป็น "ด้านล่าง" */
+    align-items: flex-end; 
+    
+    /* หรือถ้าอยากดันลงมาอีกแบบอิสระ ให้ใช้ margin-top แทน */
+    /* justify-content: flex-start; */
+    /* padding-top: 100px; */
+}
+
+/* 2. สั่งดันรูปตาชั่งลงมาอีกนิด (Fine tuning) */
+.side-image.right img {
+    /* ใช้ transform เลื่อนลงมาแกน Y (แนวตั้ง) */
+    /* ลองปรับเลข 50px เป็น 80px หรือ 100px ตามใจชอบเลยครับ */
+    transform: translateY(120px); 
+}
