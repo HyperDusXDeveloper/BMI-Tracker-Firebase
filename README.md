@@ -44,7 +44,7 @@
 
 <div align="center">
   <a href="https://i.ytimg.com/vi/dJ9uVVNWClk/maxresdefault.jpg">
-    <img src="https://www.youtube.com/watch?v=dJ9uVVNWClk&list=RDdJ9uVVNWClk&start_radio=1" width="600" />
+    <img src="https://i.ytimg.com/vi/dJ9uVVNWClk/maxresdefault.jpg" width="600" />
   </a>
 </div>
 
