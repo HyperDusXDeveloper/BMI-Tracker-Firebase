@@ -9,10 +9,10 @@
   </p>
 
   <p>
-    <a href="https://bmi-tracker-xxxxx.web.app">
+    <a href="https://bmi-tracker-firebase.web.app/dashboard.html">
       <img src="https://img.shields.io/badge/Demo-Live_Preview-FF5722?style=for-the-badge&logo=firebase&logoColor=white" alt="Live Demo" />
     </a>
-    <a href="https://youtu.be/ยังไม่มีคลิปคับ 5555 ">
+    <a href="https://www.youtube.com/watch?v=dJ9uVVNWClk&list=RDdJ9uVVNWClk&start_radio=1">
       <img src="https://img.shields.io/badge/Video-Presentation-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Video" />
     </a>
   </p>
@@ -40,11 +40,11 @@
 
 ---
 
-## 🎥 คลิปนำเสนอ
+## 🎥 คลิปนำเสนอ (ยังไม่ได้อัพคลิป คับ เพราะ ตอนนี้ คิด แต่ไม่ _ ถึง คับ )
 
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID">
-    <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg" width="600" />
+  <a href="https://i.ytimg.com/vi/dJ9uVVNWClk/maxresdefault.jpg">
+    <img src="https://i.ytimg.com/vi/dJ9uVVNWClk/maxresdefault.jpg" width="600" />
   </a>
 </div>
 
