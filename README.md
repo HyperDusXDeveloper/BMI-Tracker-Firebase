@@ -40,7 +40,7 @@
 
 ---
 
-## 🎥 คลิปนำเสนอ
+## 🎥 คลิปนำเสนอ (ยังไม่ได้อัพคลิป คับ เพราะ ตอนนี้ คิด แต่ไม่ _ ถึง คับ )
 
 <div align="center">
   <a href="https://i.ytimg.com/vi/dJ9uVVNWClk/maxresdefault.jpg">
