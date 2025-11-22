@@ -12,7 +12,7 @@
     <a href="https://bmi-tracker-xxxxx.web.app">
       <img src="https://img.shields.io/badge/Demo-Live_Preview-FF5722?style=for-the-badge&logo=firebase&logoColor=white" alt="Live Demo" />
     </a>
-    <a href="https://youtu.be/คลิปของคุณ">
+    <a href="https://youtu.be/ยังไม่มีคลิปคับ 5555 ">
       <img src="https://img.shields.io/badge/Video-Presentation-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Video" />
     </a>
   </p>
@@ -53,7 +53,5 @@
 ## 👥 ผู้จัดทำ
 
 | รหัสนิสิต | ชื่อ-นามสกุล |
-* ณัฐชนนท์ ศิรมลพิวัฒน์ 1670700044
-* จีรภัทร วัชรมูล 1670703162
 | **167070044** | **ณัฐชนนท์ ศิรมลพิวัฒน์** |
 | **1670703162** | **จีรภัทร วัชรมูล** |
