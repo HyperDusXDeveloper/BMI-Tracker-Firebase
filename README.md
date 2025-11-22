@@ -12,7 +12,7 @@
     <a href="https://bmi-tracker-firebase.web.app/dashboard.html">
       <img src="https://img.shields.io/badge/Demo-Live_Preview-FF5722?style=for-the-badge&logo=firebase&logoColor=white" alt="Live Demo" />
     </a>
-    <a href="https://www.youtube.com/watch?v=dJ9uVVNWClk&list=RDdJ9uVVNWClk&start_radio=1">
+    <a href="https://youtu.be/qjUf8Xq6Y2E">
       <img src="https://img.shields.io/badge/Video-Presentation-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Video" />
     </a>
   </p>
@@ -43,8 +43,8 @@
 ## 🎥 คลิปนำเสนอ (ยังไม่ได้อัพคลิป คับ เพราะ ตอนนี้ คิด แต่ไม่ _ ถึง คับ )
 
 <div align="center">
-  <a href="https://i.ytimg.com/vi/dJ9uVVNWClk/maxresdefault.jpg">
-    <img src="https://i.ytimg.com/vi/dJ9uVVNWClk/maxresdefault.jpg" width="600" />
+  <a href="BMI Tracker Firebase">
+     <img src="05_Testing/Test_Evidence/TC-02_Normal_Case.png" width="600" />
   </a>
 </div>
 
