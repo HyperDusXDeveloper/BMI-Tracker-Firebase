@@ -44,7 +44,7 @@
 
 <div align="center">
   <a href="https://youtu.be/qjUf8Xq6Y2E">
-     <img src="05_Testing/Test_Evidence/TC-02_Normal_Case.png" />
+     <img src="02_UX_UI_Design/Concept Art/youtube_thumbnail.jpg" />
   </a>
 </div>
 
