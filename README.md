@@ -9,7 +9,7 @@
   </p>
 
   <p>
-    <a href="https://https://bmi-tracker-firebase.web.app">
+    <a href="https://bmi-tracker-firebase.web.app/dashboard.html">
       <img src="https://img.shields.io/badge/Demo-Live_Preview-FF5722?style=for-the-badge&logo=firebase&logoColor=white" alt="Live Demo" />
     </a>
     <a href="https://www.youtube.com/watch?v=dJ9uVVNWClk&list=RDdJ9uVVNWClk&start_radio=1">
