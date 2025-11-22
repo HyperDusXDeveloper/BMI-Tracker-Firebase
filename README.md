@@ -40,11 +40,11 @@
 
 ---
 
-## 🎥 คลิปนำเสนอ (ยังไม่ได้อัพคลิป คับ เพราะ ตอนนี้ คิด แต่ไม่ _ ถึง คับ )
+## 🎥 คลิปนำเสนอ
 
 <div align="center">
-  <a href="BMI Tracker Firebase">
-     <img src="05_Testing/Test_Evidence/TC-02_Normal_Case.png" width="600" />
+  <a href="https://youtu.be/qjUf8Xq6Y2E">
+     <img src="05_Testing/Test_Evidence/TC-02_Normal_Case.png" />
   </a>
 </div>
 
