@@ -1,8 +1,3 @@
-// app.js - ฉบับเชื่อมต่อ Firebase สมบูรณ์ + เนื้อหาละเอียด + แก้ไขเวลา
-
-// -------------------------------------------------
-// 1. การตั้งค่า Firebase (เอา Config ของคุณมาใส่ตรงนี้!)
-// -------------------------------------------------
 const firebaseConfig = {
   apiKey: "AIzaSyD-jMhbBNhKhW6WviwLFF0zsA9Myp2SYiI",
   authDomain: "bmi-tracker-firebase.firebaseapp.com",
@@ -13,16 +8,12 @@ const firebaseConfig = {
   measurementId: "G-F1Y7RV1GT7"
 };
 
-// เริ่มต้นทำงาน Firebase
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
 console.log("Firebase เชื่อมต่อแล้ว!");
 
-// -------------------------------------------------
-// 2. ระบบตรวจสอบสถานะล็อกอิน (Auth State Observer)
-// -------------------------------------------------
 auth.onAuthStateChanged((user) => {
     const path = window.location.pathname;
     const page = path.split("/").pop();
@@ -43,10 +34,6 @@ auth.onAuthStateChanged((user) => {
         }
     }
 });
-
-// -------------------------------------------------
-// 3. ฟังก์ชันสำหรับหน้า Login (index.html)
-// -------------------------------------------------
 const loginBtn = document.getElementById('google-login-btn');
 if (loginBtn) {
     loginBtn.addEventListener('click', () => {
@@ -61,10 +48,6 @@ if (loginBtn) {
             });
     });
 }
-
-// -------------------------------------------------
-// 4. ฟังก์ชันสำหรับหน้า Dashboard
-// -------------------------------------------------
 
 function setupUserProfile(user) {
     const profilePic = document.getElementById('user-profile-pic');
@@ -89,8 +72,6 @@ function selectGender(gender) {
     if(btn) btn.classList.add('active');
 }
 
-// app.js - แก้ไข Validation ให้รัดกุมขึ้น (ป้องกัน Godzilla Mode 🦖)
-
 function calculateBMI() {
     const weightInput = document.getElementById('weight');
     const heightInput = document.getElementById('height');
@@ -100,56 +81,32 @@ function calculateBMI() {
     const weight = parseFloat(weightInput.value);
     const height = parseFloat(heightInput.value);
     const age = parseFloat(ageInput.value);
-
-    // --- 🛡️ โซนตรวจสอบความถูกต้อง (Validation V2) ---
-
-    // 1. เช็คค่าว่าง
     if (!weightInput.value || !heightInput.value || !ageInput.value) {
         alert("-> BMI EMPITY INFOMATION ALERT ! <-\n"+"กรุณากรอกข้อมูลให้ครบทุกช่องนะค่า🥺!"); return;
     }
     if (!genderBtn) {
         alert("-> BMI CALCULATOR ALERT ! <-\n"+"กรุณาระบุเพศก่อนคำนวณ นะค่า 🥺!"); return;
     }
-
-    // 2. เช็คช่วงอายุ (Age Range) : 1 - 120 ปี
     if (age < 5 || age > 120) {
         alert("-> BMI CALCULATOR ALERT ! <-\n"+"อายุต้องอยู่ระหว่าง 5 - 120 ปี นะค่า 🥺"); return;
     }
-
-    // 3. เช็คช่วงส่วนสูง (Height Range) : 50 - 300 ซม.
-    // (มนุษย์ผู้ใหญ่ไม่น่าจะเตี้ยกว่า 50 ซม. หรือสูงเกิน 3 เมตร)
     if (height < 102 || height > 250) {
         alert("-> BMI CALCULATOR ALERT ! <-\n"+"ส่วนสูงต้องอยู่ระหว่าง 102 - 250 เซนติเมตร. (กรุณากรอกตามจริง นะค่า🥺)");
         return;
     }
-
-    // 4. เช็คช่วงน้ำหนัก (Weight Range) : 2 - 600 กก.
-    // (แก้ให้เลข 600 เป๊ะๆ ก็แจ้งเตือนด้วย ถ้าคิดว่ามันเยอะไป)
     if (weight < 15 || weight >= 600) {
         alert("-> BMI CALCULATOR ALERT ! <-\n"+"น้ำหนักต้องอยู่ระหว่าง 15 - 600 กิโลกรัม นะค่า 🥺! "); 
         return;
     }
-
-    // --------------------------------------------------
-
-    // 2. คำนวณ BMI
     const h_meter = height / 100;
-    const bmiValue = weight / (h_meter * h_meter); // เก็บค่าดิบไว้เช็คก่อน
-    
-    // --- 🛡️ ด่านพิเศษ: เช็ค BMI เวอร์เกินจริง ---
-    // ... (หลังคำนวณ bmiValue เสร็จ) ...
-
-    // เพิ่มด่านนี้เข้าไปดักพวกค่าแปลกๆ
+    const bmiValue = weight / (h_meter * h_meter);
     if (bmiValue < 10 || bmiValue > 100) {
-        alert("ค่า BMI ที่ได้ "+ bmiValue + " ซึ่ง ข้อมูลไม่สมเหตุสมผล! (ค่า BMI ออกมาแปลกเกินไป กรุณาเช็คข้อมูลอีกครั้งนะค่า 🥺)");
+        alert("-> BMI CALCULATOR ALERT ! <-\n" + "ค่า BMI ที่ได้ "+ bmiValue + " ซึ่ง ข้อมูลไม่สมเหตุสมผล! (ค่า BMI ออกมาแปลกเกินไป กรุณาเช็คข้อมูลอีกครั้งนะค่า 🥺)");
         return;
     }
 
     const bmi = bmiValue.toFixed(1);
-    // ...
     const gender = genderBtn.id.replace("gender-", "");
-
-    // 3. แปลผล (Logic เดิม - 5 ระดับ)
     let status = "", advice = "", color = "";
 
     if (bmi < 18.5) {
@@ -200,7 +157,6 @@ function calculateBMI() {
             </ul>`;
     }
 
-    // 4. แสดงผล
     document.getElementById('bmi-value').innerText = bmi;
     
     const statusElement = document.getElementById('bmi-status');
@@ -208,8 +164,6 @@ function calculateBMI() {
     statusElement.style.color = color;
 
     document.getElementById('bmi-advice').innerHTML = advice;
-
-    // 5. บันทึก Firebase
     const user = auth.currentUser;
     if (user) {
         db.collection("bmi_records").add({
@@ -229,7 +183,6 @@ function calculateBMI() {
     }
 }
 
-// ฟังก์ชันดึงประวัติ (Load History)
 function loadHistory(uid) {
     const historyList = document.getElementById('history-list');
     if (!historyList) return;
@@ -250,28 +203,20 @@ function loadHistory(uid) {
             let html = "";
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
-                
-                // 1. แปลงวันที่และเวลา (แก้ไขตรงนี้)
                 let date = "-";
                 if (data.timestamp) {
                     date = new Date(data.timestamp.seconds * 1000).toLocaleString('th-TH'); 
                 }
-                
-                // 2. สี Badge
                 let badgeClass = "normal";
                 if (data.status.includes("Under") || data.status.includes("ผอม")) badgeClass = "under";
                 else if (data.status.includes("Over") || data.status.includes("เกิน")) badgeClass = "over";
                 else if (data.status.includes("Obese") || data.status.includes("อ้วน")) badgeClass = "obese";
-
-                // 3. ล้าง "บรรทัดใหม่" และ "เครื่องหมายคำพูด" ออกก่อนใส่ปุ่ม
                 let safeAdvice = "";
                 if (data.advice) {
                     safeAdvice = data.advice
                         .replace(/(\r\n|\n|\r)/gm, "") 
                         .replace(/"/g, "&quot;");      
                 }
-
-                // 4. สร้างแถวตาราง
                 html += `
                 <tr>
                     <td>${date}</td>
@@ -292,8 +237,6 @@ function loadHistory(uid) {
             console.error("Error:", error);
         });
 }
-
-// ฟังก์ชันลบข้อมูล (Delete)
 function deleteRecord(docId) {
     if(confirm("ต้องการลบรายการนี้ใช่ไหม?")) {
         db.collection("bmi_records").doc(docId).delete().then(() => {
@@ -304,14 +247,12 @@ function deleteRecord(docId) {
         });
     }
 }
-
-// ฟังก์ชัน Modal (แก้ไขให้ใช้ innerHTML)
 function openModal(adviceText) {
     const modal = document.getElementById('advice-modal');
     const modalText = document.getElementById('modal-text');
     
     if(modal && modalText) {
-        modalText.innerHTML = adviceText; // ใช้ innerHTML เพื่อแสดงผล HTML Tag
+        modalText.innerHTML = adviceText;
         modal.style.display = 'flex';
     }
 }
@@ -322,13 +263,12 @@ function closeModal() {
 
 window.onclick = function(e) {
     if(e.target == document.getElementById('advice-modal')) closeModal();
-}// ส่วนหัวข้อ (สีแดง ตัวใหญ่ มีเงา)
+}
 console.log(
   "%cBMI Tracker Firebase!", 
   "color: yellow; font-size: 60px; font-weight: bold; text-shadow: 2px 2px 0px #000;"
 );
 
-// ส่วนเนื้อหา (ตัวหนังสือปกติ)
 console.log(
   "%cCS436 Final Project BMI Tracker", 
   "font-size: 18px; color: #e0e0e0; font-family: sans-serif;"
